@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { read, utils, writeFile } from 'xlsx';
 import { db } from './firebaseConfig';
@@ -189,11 +190,23 @@ const DataManagementView: React.FC = () => {
     
     const handleServiceChange = (service: string) => {
         setSelectedServices(prev => {
-            if (service === 'الكل') return prev.includes('الكل') ? [] : ['الكل'];
+            if (service === 'الكل') {
+                // If 'All' is already in the selection, clear it. Otherwise, select all.
+                return prev.includes('الكل') ? [] : allServices;
+            }
+    
             const newSelection = new Set(prev.filter(s => s !== 'الكل'));
-            if (newSelection.has(service)) newSelection.delete(service);
-            else newSelection.add(service);
-            if (newSelection.size === allServices.length - 1) return ['الكل'];
+            if (newSelection.has(service)) {
+                newSelection.delete(service);
+            } else {
+                newSelection.add(service);
+            }
+    
+            // If all individual services are selected, also select 'All'
+            if (newSelection.size === allServices.length - 1) {
+                return allServices;
+            }
+    
             return Array.from(newSelection);
         });
     };

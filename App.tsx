@@ -27,12 +27,15 @@ const handleGenerationError = (error: unknown, setter: React.Dispatch<React.SetS
 
 export interface CertificateTexts {
   mainTitle: string;
-  subTitle: string;
+  subTitle1: string;
+  subTitle2: string;
   introLine: string;
-  bodyLine1: string;
-  bodyLine2: string;
-  bodyLine3: string;
-  bodyLine4: string;
+  bodyLine1: string; // "الخادم في"
+  bodyLine2: string; // "وذلك لاجتيازه بنجاح..."
+  // bodyLine3 is the placeholder course name for replacement
+  bodyLine3: string; 
+  // bodyLine4 is removed and merged into bodyLine2
+  bodyLine5: string; // "بتقدير عام"
   patronageTitle: string;
   patronName: string;
   responsiblePriestTitle: string;
@@ -151,12 +154,13 @@ const App: React.FC = () => {
 
   const [certificateTexts, setCertificateTexts] = useState<CertificateTexts>({
     mainTitle: 'شهادة تقدير',
-    subTitle: 'الأمانة العامة لكنيسة القديس بولس بالعبور  إجتماع الخدام العام',
+    subTitle1: 'الأمانة العامة لكنيسة القديس بولس بالعبور',
+    subTitle2: 'إجتماع الخدام العام',
     introLine: 'بكل الحب والتقدير تتشرف الأمانة العامة للخدمة بمنح هذه الشهادة الي',
     bodyLine1: 'الخادم في',
-    bodyLine2: 'وذلك لاجتيازه بنجاح',
-    bodyLine3: 'كورس مجتمع يسوع',
-    bodyLine4: 'لخدام وخادمات الكنيسة، بتقدير عام',
+    bodyLine2: 'وذلك لاجتيازه بنجاح كورس مجتمع يسوع لخدام وخادمات الكنيسة',
+    bodyLine3: 'كورس مجتمع يسوع', // This acts as a placeholder for replacement
+    bodyLine5: 'بتقدير عام',
     patronageTitle: 'تحت رعاية',
     patronName: 'القمص روفائيل الأنبا بيشوي\nالنائب البابوي لمدينة العبور',
     responsiblePriestTitle: 'الأب الكاهن المسئول',

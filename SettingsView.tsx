@@ -1,3 +1,5 @@
+
+
 import React, { useCallback, useRef } from 'react';
 import type { CertificateTexts } from './App';
 import { useToast } from './ToastProvider';
@@ -7,14 +9,16 @@ interface SettingsViewProps {
     setCertificateTexts: React.Dispatch<React.SetStateAction<CertificateTexts>>;
 }
 
+// FIX: 'bodyLine4' is not a member of 'CertificateTexts', so `Omit` is not needed. The type is simplified.
 const textLabels: Record<keyof CertificateTexts, string> = {
     mainTitle: 'العنوان الرئيسي للشهادة',
-    subTitle: 'العنوان الفرعي (اسم الجهة)',
+    subTitle1: 'السطر الثاني (تحت العنوان الرئيسي)',
+    subTitle2: 'السطر الثالث (تحت العنوان الرئيسي)',
     introLine: 'جملة التقديم الأولية',
-    bodyLine1: 'النص قبل اسم الخدمة',
-    bodyLine2: 'النص قبل اسم الكورس',
-    bodyLine3: 'اسم الكورس (سيتم استبداله تلقائياً)',
-    bodyLine4: 'النص بعد اسم الكورس وقبل التقدير',
+    bodyLine1: 'نص بدء الاجتياز (قبل اسم الخدمة)',
+    bodyLine2: 'نص الاجتياز الرئيسي (يشمل اسم الكورس والخاتمة)',
+    bodyLine3: 'اسم الكورس المؤقت (سيتم استبداله تلقائياً)',
+    bodyLine5: 'سطر التقدير (قبل التقدير الفعلي)',
     patronageTitle: 'عنوان الراعي',
     patronName: 'اسم الراعي وتفاصيله',
     responsiblePriestTitle: 'لقب الكاهن المسؤول',
@@ -54,20 +58,20 @@ const SettingsView: React.FC<SettingsViewProps> = ({ certificateTexts, setCertif
 
             <div className="border border-gray-200/80 dark:border-slate-700 rounded-lg shadow-sm">
                 <div className="p-6 bg-white dark:bg-slate-800 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-t-lg">
-                   {Object.keys(certificateTexts).map((key) => (
+                   {/* FIX: The conditional check for 'bodyLine4' was removed as it is no longer part of the CertificateTexts type, resolving a TypeScript error. */}
+                   {(Object.keys(certificateTexts) as Array<keyof CertificateTexts>).map((key) => (
                         <div key={key}>
                             <label htmlFor={key} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                                {textLabels[key as keyof CertificateTexts]}
+                                {textLabels[key]}
                             </label>
                             <textarea
                                 id={key}
-                                rows={key === 'patronName' ? 3 : 2}
-                                value={certificateTexts[key as keyof CertificateTexts]}
-                                onChange={(e) => handleTextChange(key as keyof CertificateTexts, e.target.value)}
-                                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-200 disabled:opacity-50"
-                                disabled={key === 'bodyLine3'}
+                                rows={key === 'patronName' ? 3 : (key === 'bodyLine2' ? 3 : 2)}
+                                value={certificateTexts[key]}
+                                onChange={(e) => handleTextChange(key, e.target.value)}
+                                className="w-full p-2 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-200"
                             />
-                            {key === 'bodyLine3' && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">هذا الحقل يتم تحديثه تلقائياً باسم الكورس الفعلي.</p>}
+                            {key === 'bodyLine2' && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">يجب أن يحتوي هذا النص على اسم الكورس المؤقت الذي سيتم استبداله. الاسم الحالي هو: "{certificateTexts.bodyLine3}"</p>}
                         </div>
                     ))}
                 </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { Certificate } from './Certificate';
 import CertificateCustomizer from './CertificateCustomizer';
@@ -40,10 +41,10 @@ const CertificateView: React.FC<CertificateViewProps> = ({ certData, onBackToRes
 
   const certificateRef = useRef<HTMLDivElement>(null);
   
-  // Dynamically update the bodyLine3 text with the actual course name
+  // Create a version of certificateTexts with the dynamic course name
   const dynamicCertificateTexts: CertificateTexts = {
       ...certificateTexts,
-      bodyLine3: certData.courseName,
+      bodyLine3: certData.courseName, // Pass the dynamic course name
   };
 
 
@@ -126,11 +127,11 @@ const CertificateView: React.FC<CertificateViewProps> = ({ certData, onBackToRes
 
       <div id="certificate-print-area" className="w-full mt-4 sm:mt-6">
         <Certificate
-// FIX: Removed extra properties that are not part of the `CertificateDisplayData` type.
           result={{ 
               name: certData.name,
               service: certData.service,
               score: certData.score,
+              courseName: certData.courseName,
           }}
           fontFamily={fontFamily}
           colorScheme={colorScheme}
