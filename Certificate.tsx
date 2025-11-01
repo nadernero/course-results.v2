@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import Logo from './Logo';
 import type { CertificateTexts } from './App';
@@ -219,11 +220,14 @@ export const Certificate: React.FC<CertificateProps> = ({
                     className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain flex-shrink-0"
                   />
                   <div className="text-center mt-0 sm:mt-2 md:mt-3">
-                      <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold" style={{ ...specialTitleStyle, fontFamily: "'El Messiri', sans-serif" }}>
+                      <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold" style={{ ...specialTitleStyle, fontFamily: "'Cairo', sans-serif" }}>
                         {certificateTexts.mainTitle}
                       </h2>
-                       <p className="text-xs sm:text-base md:text-lg mt-5 sm:mt-6 font-semibold whitespace-pre-wrap" style={{ ...regularTextStyle, fontFamily: "'Cairo', sans-serif" }}>
-                        {certificateTexts.subTitle}
+                       <p className="text-xs sm:text-base md:text-lg mt-5 sm:mt-6 font-semibold" style={{ ...regularTextStyle, fontFamily: "'Cairo', sans-serif" }}>
+                        {certificateTexts.subTitle1}
+                      </p>
+                      <p className="text-xs sm:text-base md:text-lg mt-1 font-semibold" style={{ ...regularTextStyle, fontFamily: "'Cairo', sans-serif" }}>
+                        {certificateTexts.subTitle2}
                       </p>
                   </div>
                   <Logo className="w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 object-contain flex-shrink-0" />
@@ -237,7 +241,10 @@ export const Certificate: React.FC<CertificateProps> = ({
                   {result.name}
                 </h3>
                 <p className={paragraphClass} style={regularTextStyle}>
-                  {certificateTexts.bodyLine1} <strong style={specialTitleStyle}>{result.service}</strong> {certificateTexts.bodyLine2} <strong style={specialTitleStyle}>{certificateTexts.bodyLine3}</strong> {certificateTexts.bodyLine4} <strong style={specialTitleStyle}>{typeof result.score === 'number' ? getGrade(result.score) : 'ناجح'}</strong>.
+                  {certificateTexts.bodyLine1} <strong style={specialTitleStyle}>{result.service}</strong> {certificateTexts.bodyLine2} <strong style={specialTitleStyle}>{certificateTexts.bodyLine3}</strong> {certificateTexts.bodyLine4}
+                </p>
+                <p className={`${paragraphClass} mt-2 text-center`} style={regularTextStyle}>
+                  {certificateTexts.bodyLine5} <strong style={specialTitleStyle}>{typeof result.score === 'number' ? getGrade(result.score) : 'ناجح'}</strong>.
                 </p>
               </main>
     
