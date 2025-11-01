@@ -1,3 +1,5 @@
+
+
 import React, { useCallback, useRef } from 'react';
 import type { CertificateTexts } from './App';
 import { useToast } from './ToastProvider';
@@ -9,12 +11,14 @@ interface SettingsViewProps {
 
 const textLabels: Record<keyof CertificateTexts, string> = {
     mainTitle: 'العنوان الرئيسي للشهادة',
-    subTitle: 'العنوان الفرعي (اسم الجهة)',
+    subTitle1: 'السطر الثاني (تحت العنوان الرئيسي)',
+    subTitle2: 'السطر الثالث (تحت العنوان الرئيسي)',
     introLine: 'جملة التقديم الأولية',
     bodyLine1: 'النص قبل اسم الخدمة',
     bodyLine2: 'النص قبل اسم الكورس',
     bodyLine3: 'اسم الكورس (سيتم استبداله تلقائياً)',
-    bodyLine4: 'النص بعد اسم الكورس وقبل التقدير',
+    bodyLine4: 'نهاية فقرة الاجتياز (السطر الأول)',
+    bodyLine5: 'بداية فقرة التقدير (السطر الثاني)',
     patronageTitle: 'عنوان الراعي',
     patronName: 'اسم الراعي وتفاصيله',
     responsiblePriestTitle: 'لقب الكاهن المسؤول',
