@@ -1,4 +1,5 @@
 
+
 import React, { useState, useCallback, useMemo, useEffect, Suspense, lazy } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { db, auth } from './firebaseConfig';
@@ -30,12 +31,11 @@ export interface CertificateTexts {
   subTitle1: string;
   subTitle2: string;
   introLine: string;
-  bodyLine1: string; // "الخادم في"
-  bodyLine2: string; // "وذلك لاجتيازه بنجاح..."
-  // bodyLine3 is the placeholder course name for replacement
-  bodyLine3: string; 
-  // bodyLine4 is removed and merged into bodyLine2
-  bodyLine5: string; // "بتقدير عام"
+  bodyLine1: string;
+  bodyLine2: string;
+  bodyLine3: string;
+  bodyLine4: string;
+  bodyLine5: string;
   patronageTitle: string;
   patronName: string;
   responsiblePriestTitle: string;
@@ -158,8 +158,9 @@ const App: React.FC = () => {
     subTitle2: 'إجتماع الخدام العام',
     introLine: 'بكل الحب والتقدير تتشرف الأمانة العامة للخدمة بمنح هذه الشهادة الي',
     bodyLine1: 'الخادم في',
-    bodyLine2: 'وذلك لاجتيازه بنجاح كورس مجتمع يسوع لخدام وخادمات الكنيسة',
-    bodyLine3: 'كورس مجتمع يسوع', // This acts as a placeholder for replacement
+    bodyLine2: 'وذلك لاجتيازه بنجاح',
+    bodyLine3: 'كورس مجتمع يسوع',
+    bodyLine4: 'لخدام وخادمات الكنيسة',
     bodyLine5: 'بتقدير عام',
     patronageTitle: 'تحت رعاية',
     patronName: 'القمص روفائيل الأنبا بيشوي\nالنائب البابوي لمدينة العبور',
